@@ -1,0 +1,59 @@
+﻿<%@ Page Language="C#" MasterPageFile="~/templates/PageTemplateRedesign.master" AutoEventWireup="true" MaintainScrollPositionOnPostback="true" CodeBehind="~/Classes/BasePage.cs" Inherits="BasePage" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="BodyContent" runat="server">
+    
+
+    <%--START DATA CONTROLS--%>
+    <div style="display: none;">
+        <asp:Button runat="server" ID="KX_BC_RXS_RVHub"/>
+        <asp:Button runat="server" ID="KX_BC_RXS_RVStep1"/>
+        <asp:Button runat="server" ID="KX_BC_RXS_RVStep2"/>
+        <asp:Button runat="server" ID="KX_BC_RXS_RVStep3"/>
+        <asp:Button runat="server" ID="KX_BC_RXS_RVLogout"/>
+                <span data-control="logout"><button class="logout btn btn-link pull-right" onclick="$('#<%=KX_BC_RXS_RVLogout.ClientID%>').click(); return false;">Logout <span class="glyphicon glyphicon-log-out"></span></button></span>
+        <span data-control="logout1"><button class="logout btn btn-link pull-right" onclick="$('#<%=KX_BC_RXS_RVLogout.ClientID%>').click(); return false;">Logout <span class="glyphicon glyphicon-log-out"></span></button></span>
+        <span data-control="Rules"><asp:CheckBox runat="server" ID="KX_PCSAYAPPUDF_UD139_PNFieldValue_CVYes_CR1_DTHallsRulesCheckbox"/></span>
+        <div data-control="ErrorMsg"><div class="alert alert-danger"><asp:Literal runat="server" ID="KxError" /></div></div>
+    </div>
+    <%--END DATA CONTROLS--%> 
+        <%--Resource--%>
+    <asp:Literal runat="server" ID="KX_PCRESOURCE_RNInductionYourHall_PNData" />
+
+    <script type="text/javascript">
+        var hubLink = $("li[data-nav='hub']"),
+            currentNav = $("li[data-nav='true']");
+        
+        hubLink.on("click", function () {
+            $('#<%=KX_BC_RXS_RVHub.ClientID%>').click();
+        });
+
+        currentNav.on("click", function () {
+            var scope = this;
+            var step = $('div.process-step__icon', scope).text();
+            clickNav(step);
+        });
+
+        function clickNav(newStep) {
+            switch (newStep) {
+            case "1":
+                $('#<%=KX_BC_RXS_RVStep1.ClientID%>').click();
+                break;
+            case "2":
+                $('#<%=KX_BC_RXS_RVStep2.ClientID%>').click();
+                break;
+            case "3":
+                $('#<%=KX_BC_RXS_RVStep3.ClientID%>').click();
+                break;
+            default:
+                console.error("Navigation step not recognised!");
+                break;
+            }
+        }
+    </script>
+    <div>
+    <asp:Button ID="KX_BC_RXS_RVBack" runat="server" Text="Back" CssClass="btn btn-default"  />
+    <asp:Button ID="KX_BC_RXA_RVNext" runat="server" Text="Next" CssClass="btn btn-primary pull-right"  />
+    <br />    <br />
+    </div>
+
+</asp:Content>
